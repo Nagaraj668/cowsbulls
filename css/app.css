@@ -1,0 +1,62 @@
+@font-face {
+	font-family: Molengo;
+	src: url(../fonts/Molengo-Regular.ttf);
+}
+
+@font-face {
+	font-family: Roboto;
+	src: url(../fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+	font-family: Roboto-bold;
+	src: url(../fonts/Roboto-Bold.ttf);
+}
+
+body, html {
+	font-family: Molengo;
+	background-color: #f3f3f3;
+}
+
+.header {
+	padding: 10px;
+	background: #e8e8e8;
+}
+
+.bold {
+	font-family: Roboto-Bold;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.box-1 {
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.26);
+	border-radius: 2px;
+	padding: 10px;
+	background-color: #fff;
+	margin: 10px;
+}
+
+button {
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.26);
+	border-radius: 2px;
+}
+
+.no-box {
+	box-shadow: none !important;
+}
+
+.header-text {
+	font-size: x-large;
+}
+
+.v-mid {
+	vertical-align: middle;
+	display: table-cell;
+}
+
+.profile-pic {
+	border-radius: 50%;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome to Cows and Bulls</title>
+
+<link rel="stylesheet" type="text/css"
+	href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/app.css">
+<script src="js/jquery-1.12.2	.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/game.js"></script>
+
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div id="header"></div>
+	</div>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<p class="text-primary">Choose Game type</p>
+				<!-- Single button -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-success dropdown-toggle bold"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						YOU VS FRIEND <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="find-opponents-word.html">Find Opponent's word</a></li>
+						<li><a href="#">Find System's word</a></li>
+					</ul>
+				</div>
+				<button class="btn btn-warning bold">YOU VS SYSTEM</button>
+			</div>
+		</div>
+		<h4>
+			Recent Games <span class="glyphicon glyphicon-time"></span>
+		</h4>
+	</div>
+
+</body>
+</html>
