@@ -42,8 +42,8 @@ function proceedToFindOpponentWord() {
 	}
 	var word = $("#word").val();
 	if (validateWord(word)) {
-		var key = firebase.database().ref().child(uid).child('matches').push().key;
-		firebase.database().ref().child(uid).child('matches/' + key).set({
+		var key = firebase.database().ref().child('users/'+uid).child('matches').push().key;
+		firebase.database().ref().child('users/'+uid).child('matches/' + key).set({
 			'WordToOpponent' : word
 		}).then(function() {
 			A('done');
@@ -55,4 +55,8 @@ function proceedToFindOpponentWord() {
 		$("#word").focus();
 		$("#word").select();
 	}
+}
+
+function back() {
+	window.history.back();
 }

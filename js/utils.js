@@ -23,18 +23,33 @@ var AuthType = {
 
 function validateWord(word) {
 	var flag = false;
-	if (word != null && word != undefined && word.length == 4 && !checkDuplicate(word)) {
+	if (word != null && word != undefined && word.length == 4
+			&& !checkDuplicate(word)) {
 		flag = true;
 	}
 	return flag;
 }
 
-function checkDuplicate(str){
-    for(var i = 0; i < str.length; i++){
-        var re = new RegExp("[^"+ str[i] +"]","g");
-        if(str.replace(re, "").length >= 2){
-            return true;
-        }
-    }
-    return false;
+function checkDuplicate(str) {
+	for (var i = 0; i < str.length; i++) {
+		var re = new RegExp("[^" + str[i] + "]", "g");
+		if (str.replace(re, "").length >= 2) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function SL(msg) {
+	var loadingHtml = '<div class="loading-box"'
+			+ 'style="background: #fff; padding: 5px;" id="loading-msg">' + msg
+			+ '...</div>';
+	if (($("#loading-container").css('width')) == undefined)
+		$("body").append("<div class='loading-container'></div>");
+	$(".loading-container").html(loadingHtml);
+	$("#loading-msg").css('visibility', "visible");
+}
+
+function HL() {
+	$("#loading-msg").css('visibility', "hidden");
 }
