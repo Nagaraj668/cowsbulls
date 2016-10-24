@@ -1,18 +1,34 @@
-
 function authenticate(success, failure, emailVerifyFlag) {
 	firebase.auth().onAuthStateChanged(function(user) {
-		  if (user) {
-			  if (emailVerifyFlag == undefined && !user.emailVerified) {
-				  // email not verified
-				  nav("email-verify.html");
-			  } else {
-				  success(user);				  
-			  }
-		  } else {
-			  L("User is not signed in.");
-			  failure();
-		  }
-		});
+		if (user) {
+			if (emailVerifyFlag == undefined && !user.emailVerified) {
+				// email not verified
+				nav("email-verify.html");
+			} else {
+				firebase.database().ref().child("status").child(user.uid).child("request-status").on(
+						"child_added",
+						function(data) {
+							firebase.database().ref().child("users").child(user.uid).child(
+									"request-status").child(data.key).set(data.val() + 1);
+						});
+
+				firebase.database().ref().child("users").child(user.uid).child("request-status").on(
+						"child_changed",
+						function(data) {
+							firebase.database().ref().child("users").child(user.uid).child(
+							"request-status").child(data.key).set(data.val() + 1);
+						});
+				success(user);
+			}
+		} else {
+			L("User is not signed in.");
+			failure();
+		}
+	});
+}
+
+function requestStatus(uid, myuid, callback) {
+	firebase.database().ref().child("users").child(uid).child("request-status").child(myuid)
 }
 
 function A(msg) {
@@ -69,4 +85,8 @@ function SL(msg) {
 
 function HL() {
 	$("#loading-msg").css('visibility', "hidden");
+}
+
+function random() {
+	return Math.floor((Math.random() * 10) + 1);
 }
