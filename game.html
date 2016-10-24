@@ -17,42 +17,62 @@
 
 </head>
 <body>
-
 	<div class="container-fluid">
 		<div id="header"></div>
 	</div>
 	<br>
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-				<p class="text-primary">Choose Game type</p>
-				<!-- Single button -->
-				<div class="btn-group">
-					<button type="button" class="btn btn-success dropdown-toggle bold"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						YOU VS FRIEND <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="find-opponents-word.html">Find Opponent's
-								word</a></li>
-						<li><a href="#">Find System's word</a></li>
-					</ul>
+		<div data-example-id="togglable-tabs">
+			<ul class="nav nav-tabs" id="myTabs" role="tablist">
+				<li role="presentation" class="active"><a href="#home"
+					id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+					aria-expanded="false">Recent Matches</a></li>
+				<li role="presentation" class=""><a href="#new-match"
+					id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+					aria-expanded="false">New Match</a></li>
+				<li role="presentation" class="dropdown"><a href="#"
+					class="dropdown-toggle" id="myTabDrop1" data-toggle="dropdown"
+					aria-controls="myTabDrop1-contents" aria-expanded="false">Friends
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" aria-labelledby="myTabDrop1"
+						id="myTabDrop1-contents">
+						<li class=""><a href="#myFriends" role="tab"
+							id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1"
+							aria-expanded="false">My Friends</a></li>
+						<li class=""><a href="#globalFriends" role="tab" onclick="onGlobalFriendsShown()"
+							id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2"
+							aria-expanded="true">Global Players</a></li>
+					</ul></li>
+				<li role="presentation" class=""><a href="#stats" id="home-tab"
+					role="tab" data-toggle="tab" aria-controls="home"
+					aria-expanded="false">Statistics</a></li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade active in" role="tabpanel" id="home"
+					aria-labelledby="home-tab">
+					<p>Recent matches</p>
 				</div>
-				<button class="btn btn-warning bold">YOU VS SYSTEM</button>
+				<div class="tab-pane fade " role="tabpanel" id="new-match"
+					aria-labelledby="home-tab">
+					<p>New matches</p>
+				</div>
+				<div class="tab-pane fade" role="tabpanel" id="myFriends"
+					aria-labelledby="dropdown1-tab">
+					<p>My Friends</p>
+				</div>
+				<div class="tab-pane fade in" role="tabpanel" id="globalFriends"
+					aria-labelledby="dropdown2-tab" onshow="onGlobalFriendsShown()">
+					<p>Global Friends</p>
+					<div class="row" id="player-wrapper">
+					</div>
+				</div>
+				<div class="tab-pane fade active" role="tabpanel" id="stats"
+					aria-labelledby="home-tab">
+					<p>Statistics</p>
+				</div>
 			</div>
-		</div>
-		<br>
-		<h4>
-			Recent Games <span class="glyphicon glyphicon-time"></span>
-		</h4>
-		<div class="row">
-			
-			<div class="col-sm-3">
-				<div class="box-1">Hi</div>
-			</div>
-		
 		</div>
 	</div>
-
 </body>
 </html>

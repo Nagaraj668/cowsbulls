@@ -1,14 +1,14 @@
-<div class="row" style="background-color: #1f8524; padding: 5px">
-	<!-- Download App -->
-</div>
 <div class="row header">
 	<div class="col-sm-3 header-text bold">Cows and Bulls</div>
 	<div class="col-sm-3">
-		<div id="usernameInfo" class="v-mid">
-			Welcome <span class="bold" id="username" onclick="onUsernameClick()"></span>
+		<div id="usernameInfo" class="v-mid pointer"
+			onclick="profileClicked()">
 			<img alt="" src="images/ic_person_black_24dp_1x.png" id="photoPic"
-				class="profile-pic">
+				class="profile-pic"> <span class="bold" id="username"
+				onclick="onUsernameClick()"></span>
 		</div>
+	</div>
+	<div class="col-sm-2">
 	</div>
 	<div class="col-sm-2">
 		<input type="text" class="form-control" placeholder="Search...">
@@ -30,9 +30,20 @@
 			</ul>
 		</div>
 	</div>
-	<div class="col-sm-2"></div>
 </div>
 
 <script>
 	$("#usernameInfo").height($(".header").height() + "px");
+
+	function logout() {
+		firebase.auth().signOut().then(function() {
+			// Sign-out successful.
+		}, function(error) {
+			// An error happened.
+		});
+	}
+
+	function profileClicked() {
+		nav("profile.html");
+	}
 </script>

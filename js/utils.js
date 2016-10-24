@@ -1,3 +1,20 @@
+
+function authenticate(success, failure, emailVerifyFlag) {
+	firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+			  if (emailVerifyFlag == undefined && !user.emailVerified) {
+				  // email not verified
+				  nav("email-verify.html");
+			  } else {
+				  success(user);				  
+			  }
+		  } else {
+			  L("User is not signed in.");
+			  failure();
+		  }
+		});
+}
+
 function A(msg) {
 	alert(msg);
 }

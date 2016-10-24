@@ -4328,7 +4328,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 .nav>li>a:hover, .nav>li>a:focus {
 	text-decoration: none;
-	background-color: #0d0d0d
+	background-color: #d6d6d6
 }
 
 .nav>li.disabled>a {
@@ -4343,7 +4343,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
-	background-color: #0d0d0d;
+	/* background-color: #0d0d0d; */
 	border-color: #337ab7
 }
 
@@ -4375,7 +4375,6 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 
 .nav-tabs>li>a:hover {
-	border-color: #0d0d0d #0d0d0d #ddd
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
