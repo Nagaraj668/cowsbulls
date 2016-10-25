@@ -185,15 +185,12 @@ function onPlayerClicked(selecteduid, name, photo) {
 }
 
 var msg = {};
+
 function onSystemWord() {
 	try {
 		$("#player-wrapper-2").empty();
 		onGlobalFriendsShown2();
-		$.get({
-			url : baseUrl + 'get-word.php',
-			cache : false
-		}, function(data) {
-		});
+
 		msg = {
 			code : 0,
 			gameType : 'Find System Word',
@@ -212,15 +209,52 @@ function onSystemWord() {
 }
 
 function onFriendsWord() {
-
+	try {
+		$("#player-wrapper-2").empty();
+		onGlobalFriendsShown2();
+		$.get({
+			url : baseUrl + 'get-word.php',
+			cache : false
+		}, function(data) {
+		});
+		msg = {
+			code : 1,
+			gameType : 'Find System Word',
+			message : 'Lets play and see who finds system word first',
+			user : {
+				displayName : name,
+				uid : uid,
+				photoURL : photoUrl
+			},
+			requestedOn : getShortDate(),
+			viewed : false
+		};
+	} catch (e) {
+		A(e);
+	}
 }
 
 function sendGameRequest() {
 	$("#selectedPlayerStatus").text("Sending game request...");
-	var key = firebase.database().ref().child('users').child(selectedUid)
-			.child('notifications').push().key;
-	firebase.database().ref().child('users').child(selectedUid).child(
-			'notifications').child(key).set(msg).then(function() {
-		$("#selectedPlayerStatus").text("Request sent");
+
+	var matchId = firebase.database().ref().child('matches').push().key;
+	msg.created_by = uid;
+	firebase.database().ref().child('matches').child(matchId).set(msg).then(
+			function() {
+				msg.matchId = matchId;
+				var key = firebase.database().ref().child('users').child(
+						selectedUid).child('notifications').push().key;
+				firebase.database().ref().child('users').child(selectedUid)
+						.child('notifications').child(key).set(msg).then(
+								function() {
+									$("#selectedPlayerStatus").text(
+											"Request sent");
+								});
+			});
+
+	$.get({
+		url : baseUrl + 'new-system-game.php',
+		cache : false
+	}, function(data) {
 	});
 }

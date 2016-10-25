@@ -50,7 +50,7 @@ firebase
 							+ '\''
 							+ ')" href="#" class="list-group-item"><div class="row"><div class="col-sm-2"><img alt="" src="'
 							+ data.val().user.photoURL
-							+ '" width="50">'
+							+ '" width="60">'
 							+ '</div><div class="col-sm-8"><div class="col-sm-8"><h4 class="list-group-item-heading bold">'
 							+ data.val().user.displayName
 							+ '</h4></div><div class="col-sm-4">'

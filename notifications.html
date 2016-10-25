@@ -25,7 +25,7 @@
 	<div class="container">
 		<h4 class="text-primary">Notifications</h4>
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-5">
 				<div class="list-group" id="notifyList">
 					<!-- <a
 						onclick="onNotificationItemClick(this, 0, 'Find System Word', 'Vinod', 'hdd4NIUCvkNx2oumGRZdmNdNYn62', 'https://firebasestorage.googleapis.com/v0/b/cows-and-bulls-444f5.appspot.com/o/users%2Fhdd4NIUCvkNx2oumGRZdmNdNYn62%2FprofilePicture.png?alt=media&amp;token=c114534d-d652-4e7b-97f8-1195ec1c39aa', 'Lets play and see who finds system word first', 'Oct 25')"
@@ -53,12 +53,18 @@
 						</div></a> -->
 				</div>
 			</div>
-			<div class="col-sm-8" id="reqDetails">
+			<div class="col-sm-7" id="reqDetails">
 				<p class="text-primary bold" id="requestorName"></p>
 				<img alt="" src="images/ic_account_circle_black_48dp_2x.png"
 					width="100" id="reqPhoto">
-				<p class="text-default" id="reqOn"></p>
-				<p class="text-primary" id="message"></p>
+				<p>
+					<span class="text-default">Requested on: </span><span id="reqOn"
+						class="text-primary"></span>
+				</p>
+				<p>
+					<span class="text-default">Message: </span><span id="message"
+						class="text-primary"></span>
+				</p>
 
 				<button class="btn btn-success bold">SURE LETS PLAY NOW</button>
 				<button class="btn btn-danger bold">I DONT WANT TO PLAY</button>
