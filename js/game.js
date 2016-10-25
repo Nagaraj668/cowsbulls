@@ -54,24 +54,26 @@ function saveWord() {
 	var word = $('#word').val();
 	if (validateWord(word)) {
 		SL("Validating word");
-		$.get({
-			url : "http://localhost/cab/CAB/server/valid-word.php",
-			data : "word=" + word.toLowerCase()
-		}, function(data) {
-			if (data == 1) {
-				HL();
-				$('#choose-word').hide();
-				$("#choose-player").show();
-				$("#wordWrapper").prop("disabled", true);
-				onGlobalFriendsShown2();
-			} else if (data == 0) {
-				HL();
-				A("Please enter valid word");
-				$('#word').val("");
-				$('#word').focus();
+		$
+				.get(
+						{
+							url : "http://10.219.68.164/cowsbulls/cowsbulls/server/valid-word.php",
+							data : "word=" + word.toLowerCase()
+						}, function(data) {
+							if (data == 1) {
+								HL();
+								$('#choose-word').hide();
+								$("#choose-player").show();
+								$("#wordWrapper").prop("disabled", true);
+								onGlobalFriendsShown2();
+							} else if (data == 0) {
+								HL();
+								A("Please enter valid word");
+								$('#word').val("");
+								$('#word').focus();
 
-			}
-		});
+							}
+						});
 	} else {
 		A("Please enter valid word");
 		$('#word').val("");
@@ -162,29 +164,63 @@ function onGlobalFriendsShown2(idtoappend) {
 					});
 }
 
+var selectedUid;
 function onPlayerClicked(selecteduid, name, photo) {
-	$("#selectedPlayerStatus").text("Loading status...");
+	selectedUid = selecteduid;
+	L(localStorage.uid);
+	L(selecteduid);
 	$("#finalizerBlock").show();
 	$("#selectedPlayerName").text(name);
 	$("#selectedPlayerPhoto").attr("src", photo);
-	requestStatus(selecteduid, uid, function(data) {
-		L("data: "+data);
-		if (data) {
-			$("#selectedPlayerStatus").text("Online");
-			$("#selectedPlayerStatus").addClass('label-success');
-			$("#selectedPlayerStatus").removeClass('label-danger');
-		} else {
-			$("#selectedPlayerStatus").text("Offline");
-			$("#selectedPlayerStatus").addClass('label-danger');
-			$("#selectedPlayerStatus").removeClass('label-success');
-		}
-	});
+
+	/*
+	 * requestStatus(selecteduid, uid, function(data) { L("data: "+data); if
+	 * (data) { $("#selectedPlayerStatus").text("Online");
+	 * $("#selectedPlayerStatus").addClass('label-success');
+	 * $("#selectedPlayerStatus").removeClass('label-danger'); } else {
+	 * $("#selectedPlayerStatus").text("Offline");
+	 * $("#selectedPlayerStatus").addClass('label-danger');
+	 * $("#selectedPlayerStatus").removeClass('label-success'); } });
+	 */
 }
 
+var msg = {};
 function onSystemWord() {
-
+	try {
+		$("#player-wrapper-2").empty();
+		onGlobalFriendsShown2();
+		$.get({
+			url : baseUrl + 'get-word.php',
+			cache : false
+		}, function(data) {
+		});
+		msg = {
+			code : 0,
+			gameType : 'Find System Word',
+			message : 'Lets play and see who finds system word first',
+			user : {
+				displayName : name,
+				uid : uid,
+				photoURL : photoUrl
+			},
+			requestedOn : getShortDate(),
+			viewed : false
+		};
+	} catch (e) {
+		A(e);
+	}
 }
 
 function onFriendsWord() {
 
+}
+
+function sendGameRequest() {
+	$("#selectedPlayerStatus").text("Sending game request...");
+	var key = firebase.database().ref().child('users').child(selectedUid)
+			.child('notifications').push().key;
+	firebase.database().ref().child('users').child(selectedUid).child(
+			'notifications').child(key).set(msg).then(function() {
+		$("#selectedPlayerStatus").text("Request sent");
+	});
 }

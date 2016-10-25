@@ -61,8 +61,8 @@
 						<div class="col-sm-4">
 							<p class="text-primary">Choose game mode</p>
 							<div class="btn-group" role="group" aria-label="...">
-								<button type="button" class="btn btn-default no-box bold find">
-									Find system's word</button>
+								<button type="button" class="btn btn-default no-box bold find"
+									onclick="onSystemWord()">Find system's word</button>
 								<button type="button" class="btn btn-default no-box bold find">Find
 									opponent's word</button>
 							</div>
@@ -70,8 +70,9 @@
 						<div class="col-sm-2" id="choose-word">
 							<p class="text-primary">OK, Choose Word</p>
 							<div class="input-group" id="wordWrapper">
-								<input type="text" class="form-control" placeholder="Word" value="code"
-									id="word" maxlength="4" style="text-transform: uppercase"><span
+								<input type="text" class="form-control" placeholder="Word"
+									value="code" id="word" maxlength="4"
+									style="text-transform: uppercase"><span
 									class="input-group-btn">
 									<button class="btn btn-primary bold no-box"
 										onclick="saveWord()">OK</button>
@@ -100,9 +101,11 @@
 							<p class="text-primary" id="selectedPlayerName"></p>
 							<img alt="" src="" id="selectedPlayerPhoto" width="100"><br>
 							<br>
-							<p id="selectedPlayerStatus" class="label label-primary">Loading Status...</p>
-							<br><br>
-							<button class="btn btn-primary bold">PLAY</button>
+							<p id="selectedPlayerStatus" class="label label-primary">Loading
+								Status...</p>
+							<br>
+							<br>
+							<button class="btn btn-primary bold" onclick="sendGameRequest()">SEND GAME REQUEST</button>
 						</div>
 					</div>
 				</div>

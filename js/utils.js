@@ -17,7 +17,7 @@ function authenticate(success, failure, emailVerifyFlag) {
 															data.val() + 1);
 											L(data.val() + 1);
 										});
-
+						localStorage.uid = user.uid;
 						success(user);
 					}
 				} else {
@@ -57,6 +57,10 @@ function L(msg) {
 
 function J(obj) {
 	return JSON.stringify(obj);
+}
+
+function JP(jStr) {
+	return JSON.parse(jStr);
 }
 
 function nav(path) {
@@ -108,3 +112,25 @@ function random() {
 	L(random1);
 	return random1;
 }
+
+var monthNames = [ "January", "February", "March", "April", "May", "June",
+		"July", "August", "September", "October", "November", "December" ];
+
+function getMonthFullName() {
+	var d = new Date();
+	return monthNames[d.getMonth()];
+}
+
+function getMonthShortName() {
+	var d = new Date();
+	return monthNames[d.getMonth()].substring(0, 3);
+}
+
+function getShortDate() {
+	var date = new Date();
+	return getMonthShortName() + " " + date.getDate();
+}
+
+// constants
+
+var baseUrl = 'http://10.219.68.164/cowsbulls/cowsbulls/server/';
