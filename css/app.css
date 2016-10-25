@@ -38,7 +38,8 @@ body, html {
 	background-color: #fff;
 	margin: 10px;
 }
-.box-1:HOVER{
+
+.box-1:HOVER {
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.26);
 	border-radius: 2px;
 	padding: 10px;
@@ -87,6 +88,14 @@ button {
 	height: 35px;
 }
 
+.circle {
+	border-radius: 50%;
+}
+
 .profile-pic:HOVER {
 	background-color: #bdffbd;
+}
+
+.no-padd {
+	padding: 0px !important;
 }

@@ -25,6 +25,12 @@ function appendNotifications(html, callback) {
 
 function onNotificationItemClick(element, code, gameType, name, uid, photoUrl,
 		message, reqOn) {
+
+	if (closingFlag) {
+		closingFlag = false;
+		return;
+	}
+
 	$('#reqDetails').show();
 	$('#reqPhoto').attr('src', photoUrl);
 	$('.active').removeClass('active');
@@ -32,9 +38,17 @@ function onNotificationItemClick(element, code, gameType, name, uid, photoUrl,
 	$('#requestorName').text(name);
 	$('#reqOn').text(reqOn);
 	$('#message').text(message);
-	
+
 }
 
 $(document).ready(function() {
 	$('#reqDetails').hide();
 });
+
+var closingFlag;
+function closeNotifyItem(element, key) {
+	closingFlag = true;
+	$(element).parent().parent().parent().hide();
+	firebase.database().ref().child('users').child(localStorage.uid).child(
+			'notifications').child(key).set(null);
+}
