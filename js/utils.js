@@ -1,34 +1,50 @@
 function authenticate(success, failure, emailVerifyFlag) {
-	firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-			if (emailVerifyFlag == undefined && !user.emailVerified) {
-				// email not verified
-				nav("email-verify.html");
-			} else {
-				firebase.database().ref().child("status").child(user.uid).child("request-status").on(
-						"child_added",
-						function(data) {
-							firebase.database().ref().child("users").child(user.uid).child(
-									"request-status").child(data.key).set(data.val() + 1);
-						});
+	firebase.auth().onAuthStateChanged(
+			function(user) {
+				if (user) {
+					if (emailVerifyFlag == undefined && !user.emailVerified) {
+						// email not verified
+						nav("email-verify.html");
+					} else {
+						firebase.database().ref().child("users")
+								.child(user.uid).child("request-status").on(
+										"child_added",
+										function(data) {
+											firebase.database().ref().child(
+													"users").child(user.uid)
+													.child("request-status")
+													.child(data.key).set(
+															data.val() + 1);
+											L(data.val() + 1);
+										});
 
-				firebase.database().ref().child("users").child(user.uid).child("request-status").on(
-						"child_changed",
-						function(data) {
-							firebase.database().ref().child("users").child(user.uid).child(
-							"request-status").child(data.key).set(data.val() + 1);
-						});
-				success(user);
-			}
-		} else {
-			L("User is not signed in.");
-			failure();
-		}
-	});
+						success(user);
+					}
+				} else {
+					L("User is not signed in.");
+					failure();
+				}
+			});
 }
 
 function requestStatus(uid, myuid, callback) {
-	firebase.database().ref().child("users").child(uid).child("request-status").child(myuid)
+	var rand = random();
+	firebase.database().ref().child("users").child(uid).child("request-status")
+			.child(myuid).set(rand);
+	firebase.database().ref().child("users").child(uid).child("request-status")
+			.child(myuid).on(
+					'value',
+					function(data) {
+						// L("data1: " + data.val())
+						if (data.val() == rand + 1) {
+							firebase.database().ref().child("users").child(uid)
+									.child("request-status").child(myuid).set(
+											null);
+							callback(true);
+						} else {
+							callback();
+						}
+					});
 }
 
 function A(msg) {
@@ -88,5 +104,7 @@ function HL() {
 }
 
 function random() {
-	return Math.floor((Math.random() * 10) + 1);
+	var random1 = Math.floor((Math.random() * 10) + 1);
+	L(random1);
+	return random1;
 }

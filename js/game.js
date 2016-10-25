@@ -55,7 +55,7 @@ function saveWord() {
 	if (validateWord(word)) {
 		SL("Validating word");
 		$.get({
-			url : "http://localhost/cowsbulls/server/valid-word.php",
+			url : "http://localhost/cab/CAB/server/valid-word.php",
 			data : "word=" + word.toLowerCase()
 		}, function(data) {
 			if (data == 1) {
@@ -123,7 +123,8 @@ function onGlobalFriendsShown2(idtoappend) {
 			.on(
 					'child_added',
 					function(data) {
-						if (data.key == uid)return;
+						if (data.key == uid)
+							return;
 						var player = data.val();
 						var photo = player.photoURL;
 						if (photo == undefined) {
@@ -162,11 +163,21 @@ function onGlobalFriendsShown2(idtoappend) {
 }
 
 function onPlayerClicked(selecteduid, name, photo) {
+	$("#selectedPlayerStatus").text("Loading status...");
 	$("#finalizerBlock").show();
 	$("#selectedPlayerName").text(name);
 	$("#selectedPlayerPhoto").attr("src", photo);
 	requestStatus(selecteduid, uid, function(data) {
-		
+		L("data: "+data);
+		if (data) {
+			$("#selectedPlayerStatus").text("Online");
+			$("#selectedPlayerStatus").addClass('label-success');
+			$("#selectedPlayerStatus").removeClass('label-danger');
+		} else {
+			$("#selectedPlayerStatus").text("Offline");
+			$("#selectedPlayerStatus").addClass('label-danger');
+			$("#selectedPlayerStatus").removeClass('label-success');
+		}
 	});
 }
 

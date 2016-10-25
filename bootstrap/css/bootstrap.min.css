@@ -4380,7 +4380,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
 	{
 	color: #080808;
-	background-color: #fff;
+	background-color: #eeeeee;
 	border: 1px solid #ddd;
 	border-bottom-color: transparent;
 	cursor: default
