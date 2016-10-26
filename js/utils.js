@@ -133,4 +133,4 @@ function getShortDate() {
 
 // constants
 
-var baseUrl = 'http://10.219.68.164/cowsbulls/cowsbulls/server/';
+var baseUrl = 'http://10.219.68.164/cowsbulls/cowsbulls/server/cab';
