@@ -57,7 +57,7 @@ function saveWord() {
 		$
 				.get(
 						{
-							url : "http://10.219.68.164/cowsbulls/cowsbulls/server/valid-word.php",
+							url : baseUrl + "valid-word.php",
 							data : "word=" + word.toLowerCase()
 						}, function(data) {
 							if (data == 1) {
@@ -185,12 +185,18 @@ function onPlayerClicked(selecteduid, name, photo) {
 }
 
 var msg = {};
+var datatosend = "";
 
 function onSystemWord() {
 	try {
 		$("#player-wrapper-2").empty();
 		onGlobalFriendsShown2();
-
+		$.get({
+			url : baseUrl + 'get-word.php',
+			cache : false
+		}, function(data) {
+			datatosend = "p1=0&p2=0&system_word=" + data;
+		});
 		msg = {
 			code : 0,
 			gameType : 'Find System Word',
@@ -212,14 +218,10 @@ function onFriendsWord() {
 	try {
 		$("#player-wrapper-2").empty();
 		onGlobalFriendsShown2();
-		$.get({
-			url : baseUrl + 'get-word.php',
-			cache : false
-		}, function(data) {
-		});
+		datatosend = "p2=0&system_word=0&p1=" + data;
 		msg = {
 			code : 1,
-			gameType : 'Find System Word',
+			gameType : 'Find My Word',
 			message : 'Lets play and see who finds system word first',
 			user : {
 				displayName : name,
@@ -239,6 +241,17 @@ function sendGameRequest() {
 
 	var matchId = firebase.database().ref().child('matches').push().key;
 	msg.created_by = uid;
+
+	datatosend = datatosend + "&match_id=" + matchId;
+	A(datatosend);
+	$.post({
+		url : baseUrl + 'save-word.php',
+		cahce : false,
+		data : datatosend
+	}, function(data) {
+		A(data);
+	})
+
 	firebase.database().ref().child('matches').child(matchId).set(msg).then(
 			function() {
 				msg.matchId = matchId;
@@ -252,9 +265,4 @@ function sendGameRequest() {
 								});
 			});
 
-	$.get({
-		url : baseUrl + 'new-system-game.php',
-		cache : false
-	}, function(data) {
-	});
 }

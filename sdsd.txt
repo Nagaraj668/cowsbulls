@@ -1,0 +1,11 @@
+	var data = "";
+	if(msg.code == 0){
+		data = "system_word="+;
+	}
+	
+	$.post({
+		url : baseUrl + 'save-word.php',
+		cahce : false,
+		data : ""
+	})
+	
